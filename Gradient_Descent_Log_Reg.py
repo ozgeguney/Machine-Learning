@@ -28,11 +28,8 @@ def compute_cost_logistic(X, y, w, b, lambda_=0, safe=False):
     cost = 0.0
     for i in range(m):
         z_i = np.dot(X[i], w) + b  # (n,)(n,) or (n,) ()
-        if safe:  # avoids overflows
-            cost += -(y[i] * z_i) + log_1pexp(z_i)
-        else:
-            f_wb_i = sigmoid(z_i)  # (n,)
-            cost += -y[i] * np.log(f_wb_i) - (1 - y[i]) * np.log(1 - f_wb_i)  # scalar
+        f_wb_i = sigmoid(z_i)  # (n,)
+        cost += -y[i] * np.log(f_wb_i) - (1 - y[i]) * np.log(1 - f_wb_i)  # scalar
     cost = cost / m
 
     reg_cost = 0
